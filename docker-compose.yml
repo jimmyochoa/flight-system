@@ -1,0 +1,33 @@
+services:
+  auth-service:
+    build:
+      context: ./Backend/auth-microservice
+      dockerfile: Dockerfile
+    container_name: auth-service
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/auth-db
+      - SECRET_KEY=Qs~s$N8&9oW;9!u/.N#.B")so<"i8T*Q;%[YZ*LC:q!?G#-Y~NuQc'VD+p=5F5]
+    depends_on:
+      - mongo
+    networks:
+      - auth-network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - auth-network
+
+networks:
+  auth-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
