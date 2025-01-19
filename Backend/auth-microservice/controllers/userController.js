@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
+const secret_key = "secret";
 exports.registro = async (req,res) => {
     try {
         const {correo,nombre,contraseña} = req.body;
@@ -68,7 +69,7 @@ exports.login = async(req, res) => {
 
         const token = jwt.sign(
             {userId: Usuario._id, correo: Usuario.correo},
-            process.env.SECRET_KEY,
+            secret_key,
             {expiresIn: '1h'}
         );
         
