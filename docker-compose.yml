@@ -14,6 +14,36 @@ services:
     networks:
       - auth-network
 
+  reservations-service:
+    build:
+      context: ./Backend/reservations-microservice
+      dockerfile: Dockerfile
+    container_name: reservations-service
+    ports:
+      - "3002:3002"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/auth-db
+      - SECRET_KEY=Qs~s$N8&9oW;9!u/.N#.B")so<"i8T*Q;%[YZ*LC:q!?G#-Y~NuQc'VD+p=5F5]
+    depends_on:
+      - mongo
+    networks:
+      - auth-network
+
+  users-service:
+    build:
+      context: ./Backend/users-microservice
+      dockerfile: Dockerfile
+    container_name: users-service
+    ports:
+      - "3003:3003"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/auth-db
+      - SECRET_KEY=Qs~s$N8&9oW;9!u/.N#.B")so<"i8T*Q;%[YZ*LC:q!?G#-Y~NuQc'VD+p=5F5]
+    depends_on:
+      - mongo
+    networks:
+      - auth-network
+
   auth-service:
     build:
       context: ./Backend/auth-microservice

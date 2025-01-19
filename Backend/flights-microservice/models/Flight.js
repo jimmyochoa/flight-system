@@ -11,7 +11,7 @@ const vueloSchema = new mongoose.Schema({
     },
     fecha: {
         type: Date,
-        required: true
+        default: Date.now
     },
     precio: {
         type: Number,

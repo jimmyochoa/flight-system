@@ -7,5 +7,6 @@ const flightController = require('../controllers/flightController');
 router.get('/', verificarToken, flightController.buscarVuelos);
 router.post('/', verificarToken, flightController.crearVuelo);
 router.delete('/:id', verificarToken, flightController.eliminarVuelo);
+router.put('/:id', verificarToken, flightController.actualizarVuelo);
 
 module.exports = router;

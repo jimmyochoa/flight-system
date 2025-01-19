@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "2bcbb8f2-b719-4dc9-9bd2-36559a2dc230",
+		"name": "Sistema Gestion de Vuelos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36488040"
+	},
+	"item": [
+		{
+			"name": "Microservicio de Autenticacion",
+			"item": [
+				{
+					"name": "Registro de Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correo\": \"micorreo@gmail.com\",\r\n    \"nombre\": \"Nombre\",\r\n    \"contraseña\": \"Password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/auth/registro",
+						"description": "Este endpoint se utiliza para registrar un nuevo usuario en el sistema. Los datos necesarios incluyen el **correo electrónico**, el **nombre** y la **contraseña** del usuario. Después de un registro exitoso, el sistema devolverá un mensaje de confirmación junto con los detalles del usuario recién registrado."
+					},
+					"response": []
+				},
+				{
+					"name": "Login de Usuario",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"correo\": \"micorreo@gmail.com\",\r\n    \"contraseña\": \"Password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/auth/login",
+						"description": "Este endpoint permite a los usuarios iniciar sesión en la aplicación proporcionando su correo electrónico y contraseña. Si las credenciales son correctas, se generará un token de autenticación (JWT) que podrá ser utilizado para realizar solicitudes autenticadas a otras rutas protegidas de la API."
+					},
+					"response": []
+				}
+			],
+			"description": "Este microservicio contiene todos los endpoints relacionados con la autenticación de usuarios en el sistema. Incluye las rutas para el inicio de sesión (login), la creación de usuarios, la validación de token, y cualquier otra operación asociada a la autenticación y autorización."
+		},
+		{
+			"name": "Servicio de Usuarios",
+			"item": [
+				{
+					"name": "Buscar usuario por id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhjNjI4ZGI1Yzk0Y2MzMmQ0MDFhODgiLCJjb3JyZW8iOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3MzcyNjI4MjQsImV4cCI6MTczNzI2NjQyNH0.P_AzQM6wSlDZdinNJUTzlfWIlY0a-9cwNnGB19yBasg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/users/:usuarioid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"users",
+								":usuarioid"
+							],
+							"variable": [
+								{
+									"key": "usuarioid",
+									"value": ""
+								}
+							]
+						},
+						"description": "Este endpoint permite buscar información de un usuario específico mediante su ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener reservas del usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhjNjI4ZGI1Yzk0Y2MzMmQ0MDFhODgiLCJjb3JyZW8iOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3MzcyNjI4MjQsImV4cCI6MTczNzI2NjQyNH0.P_AzQM6wSlDZdinNJUTzlfWIlY0a-9cwNnGB19yBasg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/users/:usuarioid/reservas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"users",
+								":usuarioid",
+								"reservas"
+							],
+							"variable": [
+								{
+									"key": "usuarioid",
+									"value": ""
+								}
+							]
+						},
+						"description": "Este endpoint devuelve todas las reservas realizadas por un usuario en el sistema."
+					},
+					"response": []
+				},
+				{
+					"name": "Lista de usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhjNjI4ZGI1Yzk0Y2MzMmQ0MDFhODgiLCJjb3JyZW8iOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3MzcyNjI4MjQsImV4cCI6MTczNzI2NjQyNH0.P_AzQM6wSlDZdinNJUTzlfWIlY0a-9cwNnGB19yBasg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3003/api/users",
+						"description": "Este endpoint devuelve una lista de todos los usuarios registrados en el sistema."
+					},
+					"response": []
+				}
+			],
+			"description": "Microservicio encargado de administrar y consultar la información de los usuarios registrados en el sistema, así como las reservas asociadas."
+		},
+		{
+			"name": "Servicio de Reservacion",
+			"item": [
+				{
+					"name": "Crear reservacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhjNjI4ZGI1Yzk0Y2MzMmQ0MDFhODgiLCJjb3JyZW8iOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3MzcyNjM0NjAsImV4cCI6MTczNzI2NzA2MH0.AAml42m-6fHK4iRgXoO0nydzizLumBCbgmN3F_m_l8c"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vueloId\": \"678c3d716e2189da700413d4\",\r\n    \"usuarioId\": \"678c066b99a7494785309394\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3002/api/reservas",
+						"description": "Este endpoint permite cancelar una reservación específica utilizando su ID único."
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar Reservacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhjNjI4ZGI1Yzk0Y2MzMmQ0MDFhODgiLCJjb3JyZW8iOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3MzcyNjM0NjAsImV4cCI6MTczNzI2NzA2MH0.AAml42m-6fHK4iRgXoO0nydzizLumBCbgmN3F_m_l8c"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3002/api/reservas/678c89dd1fec57d93634918e",
+						"description": "Este endpoint permite cancelar una reservación específica utilizando su ID único."
+					},
+					"response": []
+				}
+			],
+			"description": "Este endpoint permite crear una nueva reservación para un vuelo específico asociada a un usuario."
+		},
+		{
+			"name": "Servicio de Vuelos",
+			"item": [
+				{
+					"name": "Obtener vuelos por parametros",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhjNjI4ZGI1Yzk0Y2MzMmQ0MDFhODgiLCJjb3JyZW8iOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3MzcyNjI4MjQsImV4cCI6MTczNzI2NjQyNH0.P_AzQM6wSlDZdinNJUTzlfWIlY0a-9cwNnGB19yBasg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/vuelos?id=vueloId&origen=origenCiudad&destino=destinoCiudad&fecha=fechaCiudad",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"vuelos"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "vueloId"
+								},
+								{
+									"key": "origen",
+									"value": "origenCiudad"
+								},
+								{
+									"key": "destino",
+									"value": "destinoCiudad"
+								},
+								{
+									"key": "fecha",
+									"value": "fechaCiudad"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear vuelos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhjNjI4ZGI1Yzk0Y2MzMmQ0MDFhODgiLCJjb3JyZW8iOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3MzcyNjI4MjQsImV4cCI6MTczNzI2NjQyNH0.P_AzQM6wSlDZdinNJUTzlfWIlY0a-9cwNnGB19yBasg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"origen\": \"ciudadOrigen\",\r\n    \"destino\": \"ciudadDestino\",\r\n    \"precio\": precioViaje,\r\n    \"asientosDisponibles\": numeroAsientos\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3001/api/vuelos",
+						"description": "Este endpoint permite crear un nuevo vuelo en el sistema."
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Vuelo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhjNjI4ZGI1Yzk0Y2MzMmQ0MDFhODgiLCJjb3JyZW8iOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3MzcyNjI4MjQsImV4cCI6MTczNzI2NjQyNH0.P_AzQM6wSlDZdinNJUTzlfWIlY0a-9cwNnGB19yBasg"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/vuelos/:vueloId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"vuelos",
+								":vueloId"
+							],
+							"variable": [
+								{
+									"key": "vueloId",
+									"value": ""
+								}
+							]
+						},
+						"description": "Este endpoint permite eliminar un vuelo específico utilizando su ID único."
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Vuelo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhjNjI4ZGI1Yzk0Y2MzMmQ0MDFhODgiLCJjb3JyZW8iOiJtaWNvcnJlb0BnbWFpbC5jb20iLCJpYXQiOjE3MzcyNjI4MjQsImV4cCI6MTczNzI2NjQyNH0.P_AzQM6wSlDZdinNJUTzlfWIlY0a-9cwNnGB19yBasg"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"origen\": \"ciudadOrigen\",\r\n    \"destino\": \"ciudadDestino\",\r\n    \"precio\": precioViaje,\r\n    \"asientosDisponibles\": numeroAsientos\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3001/api/vuelos/678c8e2f9d7e650082c13064",
+						"description": "Este endpoint permite actualizar los detalles de un vuelo existente, como origen, destino, precio, asientos disponibles o fecha."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
